@@ -1,0 +1,81 @@
+.example-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 500px;
+  min-width: 300px;
+  overflow: auto;
+}
+
+.isbn-col {
+  flex: 0 0 100px !important;
+  white-space: unset !important;
+}
+
+.button-row {
+  margin: 10px 0;
+}
+
+
+
+.upload{
+  height: auto;
+  /* padding-top: 30px; */
+  max-width: 100%;
+  margin:auto;
+}
+
+.no-mar{
+  margin-left: 70px;
+}
+
+.mar{
+  margin-left: 25px;
+}
+.choose{
+  /* height: 40px; */
+  padding-top: 30px;
+  max-width: 32rem;
+  margin:auto;
+}
+
+mat-form-field, textarea{
+  width: 100%;
+  }
+  mat-spinner{
+    margin: auto;
+  }
+
+  input[type="file"]{
+    visibility: hidden;
+  }
+  .image-preview{
+    height: 5rem;
+    margin: 1rem 0;
+  }
+
+  .image-preview img{
+    height: 100%;
+  }
+
+
+
+
+
+
+
+  .info-text{
+    text-align: center;
+  }
+  mat-spinner{
+    margin: auto;
+  }
+  mat-paginator{
+    margin-top: 1rem;
+  }
+  .post-image{
+   width: 100%;
+  }
+  .post-image img{
+    width: 100%;
+    box-shadow: 1px 1px 1px 5px rgba(0, 0,0, 0.5);
+  }

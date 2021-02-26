@@ -1,0 +1,59 @@
+<mat-tab-group [color]="'accent'" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+  <mat-tab label="List of Team Members" >
+
+<div class="control-section">
+    <ejs-grid #overviewgrid id='overviewgrid' [toolbar] = 'toolbarOptions' [editSettings] = 'editOptions' [dataSource]='data' rowHeight='38' [allowSelection]='true' [allowSorting]='true' height='600' (dataBound)='onDataBound($event)' [enableHover]='false' [selectionSettings]='selectionSettings' [filterSettings]='filterSettings' [allowSorting]='true' [allowFiltering]='true' [enableVirtualization]='true'>
+        <e-columns>
+            <e-column type='checkbox' [allowFiltering]='false' [allowSorting]='false' width='60'></e-column>
+            <e-column field='Employees' headerText='Employee Name' [filter]='filter' clipMode='EllipsisWithTooltip' width='200'>
+                <ng-template #template let-data>
+                    <div class="e-icons">
+                        <div class="empimg">
+                          <span class="e-icons e-user">
+                          </span>
+                        </div>
+                        <span id="Emptext">{{data.Employees}}</span>
+                      </div>
+                </ng-template>
+            </e-column>
+            <e-column field='EmployeeImg' headerText='Gender' width='0' editType = 'dropdownedit' [isPrimaryKey]='true'></e-column>
+            <e-column field='Designation' editType = 'dropdownedit' headerText='Designation' [filter]='filter' clipMode='EllipsisWithTooltip' width='170' ></e-column>
+            <e-column field='Location' editType = 'datepickeredit' headerText='Age' [filter]='filter' width='140'>
+          </e-column>
+            <e-column field='Mail' headerText='Mail' [filter]='filterSettings' width='230'></e-column>
+            <e-column field='ID' headerText='ID' editType = 'numericedit' [filter]='filterSettings' width='0'></e-column>
+            <e-column field='username' headerText='Username' [filter]='filterSettings' width='0'></e-column>
+            <e-column field='password' headerText='Password' [filter]='filterSettings' width='0'></e-column>
+            <e-column field='Access' editType = 'dropdownedit' headerText='Access level' [filter]='filter' clipMode='EllipsisWithTooltip' width='0' ></e-column>
+            <e-column field='Status' [filter]='filter' headerText='Status' editType = 'dropdownedit' width='150'>
+                <ng-template #template let-data>
+                    <div *ngIf="data.Status === 'Active';else login" class="statustemp e-activecolor">
+                            <span class="statustxt e-activecolor">{{data.Status}}</span>
+                    </div>
+                    <ng-template #login>
+                        <div class="statustemp e-inactivecolor">
+                            <span class="statustxt e-inactivecolor">{{data.Status}}</span>
+                        </div>
+                        </ng-template>
+                </ng-template>
+            </e-column>
+            <e-column field='Software' headerText='Work' [allowSorting]='false' [allowFiltering]='false' width='180'>
+              <ng-template #template let-data>
+                    <div id="myProgress" class="pbar">
+                        <div id="myBar"  *ngIf="data.Status === 'Inactive';" [style.width.%]= data.Software class="bar progressdisable">
+                          <div id="label" class="barlabel"><a routerLink = "/task">{{data.Software}}%</a></div>
+                        </div>
+                        <div id="myBar"  *ngIf="data.Status === 'Active';" [style.width.%]= data.Software class="bar">
+                                <div id="label" class="barlabel"><a routerLink = "/task">{{data.Software}}%</a></div>
+                              </div>
+                      </div>
+                </ng-template>
+            </e-column>
+        </e-columns>
+    </ejs-grid>
+</div>
+</mat-tab>
+<mat-tab label="Client Relationship Manager" >
+
+</mat-tab>
+</mat-tab-group>

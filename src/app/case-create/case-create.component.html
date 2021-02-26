@@ -1,0 +1,57 @@
+<div class="button-row">
+  <a mat-raised-button color="primary" [routerLink]="['/test']"><mat-icon>list</mat-icon></a>
+</div>
+<form [formGroup]="caseForm" (ngSubmit)="onFormSubmit(caseForm.value)">
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Client Name" formControlName="client"
+           >
+    <mat-error>
+      <span *ngIf="!caseForm.get('client').valid && caseForm.get('client').touched">Please enter ISBN</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Court" formControlName="court"
+           >
+    <mat-error>
+      <span *ngIf="!caseForm.get('court').valid && caseForm.get('court').touched">Please enter Book Title</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Case Name" formControlName="case_name"
+           >
+    <mat-error>
+      <span *ngIf="!caseForm.get('case_name').valid && caseForm.get('case_name').touched">Please enter Book Author</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Case Type" formControlName="case_type"
+           ></textarea>
+    <mat-error>
+      <span *ngIf="!caseForm.get('case_type').valid && caseForm.get('case_type').touched">Please enter Book Description</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Case Number" formControlName="case_number"
+           >
+    <mat-error>
+      <span *ngIf="!caseForm.get('case_number').valid && caseForm.get('case_number').touched">Please enter Publisher</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Case Year" formControlName="case_year"
+           >
+    <mat-error>
+      <span *ngIf="!caseForm.get('case_year').valid && caseForm.get('case_year').touched">Please enter Published Year</span>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input matInput placeholder="Case Description" formControlName="case_description"
+           >
+    <mat-error>
+      <span *ngIf="!caseForm.get('case_description').valid && caseForm.get('case_description').touched">Please enter Published Year</span>
+    </mat-error>
+  </mat-form-field>
+  <div class="button-row">
+    <button type="submit" [disabled]="!caseForm.valid" mat-raised-button color="primary"><mat-icon>save</mat-icon></button>
+  </div>
+</form>

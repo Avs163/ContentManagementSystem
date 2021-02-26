@@ -1,0 +1,263 @@
+<!-- <mat-card >
+<button #contractBtn class = "left" (click)="add($event)" ejs-progressbutton id="contract" content="Add Client" [enableProgress]="true" cssClass="e-primary e-small" (begin)="contractBegin()"
+                            (end)="contractEnd()"></button>
+                            <button class = "left" ejs-progressbutton (click)="addcase($event)" content="Add Case" [enableProgress]="true" [spinSettings]="spinCenter" [animationSettings]="slideRight"
+                            cssClass="e-outline e-primary"></button>
+</mat-card> -->
+<mat-tab-group [color]="'accent'" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+  <mat-tab label="Clients">
+
+    <div class="control-section">
+    <button class = "left" ejs-progressbutton (click)="add($event)" content="Add Client" [enableProgress]="true" [spinSettings]="spinCenter" [animationSettings]="slideRight"
+    cssClass="e-outline e-primary"></button>
+      <ejs-grid #overviewgrid id='overviewgrid'  [editSettings] = 'editOptions' [dataSource]='data' rowHeight='38' [allowSelection]='true' [allowSorting]='true' height='600' (dataBound)='onDataBound($event)' [enableHover]='false' [selectionSettings]='selectionSettings' [filterSettings]='filterSettings' [allowSorting]='true' [allowFiltering]='true' [enableVirtualization]='true'>
+          <e-columns>
+              <e-column field='Employees' headerText='CLient Name' [filter]='filter' clipMode='EllipsisWithTooltip' width='200'>
+                  <ng-template #template let-data>
+                      <div class="e-icons">
+                          <div class="empimg">
+                            <span class="e-icons e-user">
+                            </span>
+                          </div>
+                          <span id="Emptext">{{data.Employees}}</span>
+                        </div>
+                  </ng-template>
+              </e-column>
+              <e-column field='EmployeeImg' headerText='Gender' width='0' editType = 'dropdownedit' [isPrimaryKey]='true'></e-column>
+              <e-column field='Type' editType = 'dropdownedit' headerText='Type' [filter]='filter' clipMode='EllipsisWithTooltip' width='170' ></e-column>
+              <e-column field='Location' headerText='Mobile' [filter]='filter' width='140'>
+                </e-column>
+              <e-column field='Mail' headerText='Mail' [filter]='filterSettings' width='230'></e-column>
+              <e-column field='Address' headerText='Address' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='240'></e-column>
+          </e-columns>
+      </ejs-grid>
+  </div>
+  </mat-tab>
+  <mat-tab label="Cases">
+    <div class="control-section">
+      <button class = "left" ejs-progressbutton (click)="addcase($event)" content="Add Case" [enableProgress]="true" [spinSettings]="spinCenter" [animationSettings]="slideRight"
+                            cssClass="e-outline e-primary"></button>
+      <ejs-grid #casesgrid id='casesgrid'  [editSettings] = 'editOptions' [dataSource]='casedata' rowHeight='38' [allowSelection]='true' [allowSorting]='true' height='600' (dataBound)='onDataBound($event)' [enableHover]='false' [selectionSettings]='selectionSettings' [filterSettings]='filterSettings' [allowSorting]='true' [allowFiltering]='true' [enableVirtualization]='true'>
+          <e-columns>
+              <e-column field='Employees' headerText='CLient' editType = 'dropdownedit' [filter]='filter' clipMode='EllipsisWithTooltip' width='200'>
+                  <ng-template #template let-data>
+                      <div class="e-icons">
+                          <div class="empimg">
+                            <span class="e-icons e-user">
+                            </span>
+                          </div>
+                          <span id="Emptext">{{data.Employees}}</span>
+                        </div>
+                  </ng-template>
+              </e-column>
+              <e-column field='Court' editType = 'dropdownedit' headerText='Court' [filter]='filter' clipMode='EllipsisWithTooltip' width='240' ></e-column>
+              <e-column field='Name' headerText='Case Name' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='150'></e-column>
+            <e-column field='Type' editType = 'dropdownedit' headerText='Case Type' [filter]='filter' clipMode='EllipsisWithTooltip' width='190' ></e-column>
+            <e-column field='Location' headerText='Case Number' [filter]='filter' width='160'>
+          </e-column>
+            <e-column field='Year' editType = 'datepickeredit' headerText='Case Year' [filter]='filter' clipMode='EllipsisWithTooltip' width='140' ></e-column>
+            <e-column field='Description' headerText='Case Description' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='250'></e-column>
+          </e-columns>
+      </ejs-grid>
+  </div>
+  </mat-tab>
+  <mat-tab label="Upload Case Documents">
+<!-- huhd -->
+     <mat-card  class="upload">
+      <ejs-dropdownlist style="padding-left:30px ; width:190px; float:left" id='ddlelement' #samples [dataSource]='drop' [fields]='dropfields' [placeholder]='text' [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
+      <ejs-dropdownlist style="padding-left:50px ; width:380px; float:left" id='ddlelement' #samples [dataSource]='drop' [fields]='dropfields' [placeholder]='text2' [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
+      <button ejs-progressbutton class= "no-mar" content="Upload Documents" [enableProgress]="true" duration=4000 cssClass="e-outline e-primary e-hide-spinner e-progress-top"
+                            iconCss="e-btn-sb-icons e-download-icon"></button>
+      <div class="chunkupload" style="margin-top: 10px;">
+        <ejs-uploader #defaultupload  style="padding-left:10px" [asyncSettings]='path'></ejs-uploader>
+       </div>
+     </mat-card>
+
+    <div class="control-section">
+      <br/>
+      <ejs-grid #casesgrid id='casesgrid' [toolbar] = 'toolbarOptions' [editSettings] = 'editOptions' [dataSource]='casedata' rowHeight='38' [allowSelection]='true' [allowSorting]='true' height='600' (dataBound)='onDataBound($event)' [enableHover]='false' [selectionSettings]='selectionSettings' [filterSettings]='filterSettings' [allowSorting]='true' [allowFiltering]='true' [enableVirtualization]='true'>
+          <e-columns>
+              <e-column field='Employees' headerText='CLient Name' editType = 'dropdownedit' [filter]='filter' clipMode='EllipsisWithTooltip' width='200'>
+                  <ng-template #template let-data>
+                      <div class="e-icons">
+                          <div class="empimg">
+                            <span class="e-icons e-user">
+                            </span>
+                          </div>
+                          <span id="Emptext">{{data.Employees}}</span>
+                        </div>
+                  </ng-template>
+              </e-column>
+              <e-column field='Name' headerText='Case Name' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='150'></e-column>
+              <e-column field='Name' headerText='File Name' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='150'></e-column>
+            <e-column field='Year' editType = 'datepickeredit' headerText='File Size' [filter]='filter' clipMode='EllipsisWithTooltip' width='140' ></e-column>
+            <e-column field='Year' headerText='Number of Pages' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='250'></e-column>
+            <e-column field='Year' editType = 'datepickeredit' headerText='Date of Upload' [filter]='filter' clipMode='EllipsisWithTooltip' width='140' ></e-column>
+          </e-columns>
+      </ejs-grid>
+  </div>
+  </mat-tab>
+
+  <mat-tab label="Timeline">
+    <mat-card  class="choose">
+      <ejs-dropdownlist style="padding-left:10px ; width:150px; float:left" id='ddlelement' #samples [dataSource]='drop' [fields]='dropfields' [placeholder]='text' [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
+      <ejs-dropdownlist style="padding-left:10px ; width:150px; float:left" id='ddlelement' #samples [dataSource]='drop' [fields]='dropfields' [placeholder]='text2' [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
+      <button ejs-progressbutton class= "mar" content="View Documents" [enableProgress]="true" duration=4000 cssClass="e-outline e-primary e-hide-spinner e-progress-top"
+                            iconCss="e-btn-sb-icons e-download-icon"></button>
+     </mat-card>
+   <div id='to-split'>
+    <ejs-splitter #horizontal height='100%' width='100%'>
+       <e-panes>
+           <e-pane >
+             <ng-template #content>
+              <mat-tab-group [color]="'accent'" #tabs [selectedIndex]="selectedIndex" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+                <mat-tab label="View Case Documents" >
+                  <div class="control-section">
+                    <br/>
+                    <ejs-grid #casesgrid id='casesgrid' [toolbar] = 'toolbarOptions' [editSettings] = 'editOptions' [dataSource]='casedata' rowHeight='38' [allowSelection]='true' [allowSorting]='true' height='600' (dataBound)='onDataBound($event)' [enableHover]='false' [selectionSettings]='selectionSettings' [filterSettings]='filterSettings' [allowSorting]='true' [allowFiltering]='true' [enableVirtualization]='true'>
+                        <e-columns>
+                            <e-column field='Employees' headerText='CLient Name' editType = 'dropdownedit' [filter]='filter' clipMode='EllipsisWithTooltip' width='200'>
+                                <ng-template #template let-data>
+                                    <div class="e-icons">
+                                        <div class="empimg">
+                                          <span class="e-icons e-user">
+                                          </span>
+                                        </div>
+                                        <span id="Emptext">{{data.Employees}}</span>
+                                      </div>
+                                </ng-template>
+                            </e-column>
+                            <e-column field='Name' headerText='Case Name' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='150'></e-column>
+                            <e-column field='Name' headerText='File Name' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='150'></e-column>
+                          <e-column field='Year' editType = 'datepickeredit' headerText='File Size' [filter]='filter' clipMode='EllipsisWithTooltip' width='140' ></e-column>
+                          <e-column field='Year' headerText='Number of Pages' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='140'></e-column>
+                          <e-column field='Year' editType = 'datepickeredit' headerText='Date of Upload' [filter]='filter' clipMode='EllipsisWithTooltip' width='140' ></e-column>
+                          <e-column headerText='' width='140'>
+                            <ng-template #template let-data>
+                              <div>
+                                <button ejs-progressbutton (click)="nextStep()" content="Add" [enableProgress]="true" [spinSettings]="spinCenter" [animationSettings]="slideRight"
+                                cssClass="e-outline e-primary"></button>
+                                </div>
+                          </ng-template>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+                </mat-tab>
+                <mat-tab label="Add Document Entry">
+                  <div class="content">
+                      <ejs-datepicker  placeholder="Choose Date" style="padding-left:10px ; width:150px; float:left"></ejs-datepicker>
+                      <input class="e-input" type="text" style="padding-top: 7px; padding-left:10px ; width:150px; float:left" placeholder = "Start Page" />
+                      <input class="e-input" type="text" style="padding-top: 7px;padding-left:10px ; width:150px; float:left" placeholder = "End Page" />
+                      <ejs-multiselect id='sample-list2' style="padding-left:10px ; width:150px; float:left" [dataSource]='drop' [mode]='box' [fields]='dropfields' placeholder= "Choose Document Type"></ejs-multiselect>
+                      <ejs-dropdownlist style="padding-left:10px ; width:150px; float:left" id='ddlelement' #samples [dataSource]='drop' [fields]='dropfields' placeholder="Choose Entity" [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
+                      <ejs-textbox placeholder="Document Title" cssClass="e-filled" floatLabelType="Auto"></ejs-textbox>
+                    <ckeditor (change)="onChange($event)"></ckeditor>
+                    <div style="margin-top: 20px">
+                      <button type="submit" ejs-button (click)="nextStep()">Submit</button>
+                      <button type="reset" ejs-button style="margin-left: 20px">Reset</button>
+                  </div>
+                   </div>
+                </mat-tab>
+                <mat-tab label="View Timeline">
+                  <div class="control-section">
+                    <br/>
+                    <ejs-grid #casesgrid id='casesgrid' [toolbar] = 'toolbarOptions' [editSettings] = 'editOptions' [dataSource]='casedata' rowHeight='38' [allowSelection]='true' [allowSorting]='true' height='600' (dataBound)='onDataBound($event)' [enableHover]='false' [selectionSettings]='selectionSettings' [filterSettings]='filterSettings' [allowSorting]='true' [allowFiltering]='true' [enableVirtualization]='true'>
+                        <e-columns>
+                            <e-column field='Date' headerText='Date' editType = 'dropdownedit' [filter]='filter' clipMode='EllipsisWithTooltip' width='120'>
+                            </e-column>
+                            <e-column field='Name' headerText='Document Title' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='160'></e-column>
+                            <e-column field='DocType' headerText='Document Type' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='180'></e-column>
+                          <e-column headerText='View/Edit Entry' width='140'>
+                            <ng-template #template let-data>
+                              <div>
+                                <button ejs-progressbutton (click)="previousStep()" content="Edit" [enableProgress]="true" [spinSettings]="spinCenter" [animationSettings]="slideRight"
+                                cssClass="e-outline e-primary"></button>
+                                </div>
+                          </ng-template>
+                            </e-column>
+                        </e-columns>
+                    </ejs-grid>
+                </div>
+                </mat-tab>
+              </mat-tab-group>
+            </ng-template>
+           </e-pane>
+           <e-pane size='680px' >
+             <ng-template #content>
+                 <div class="content">
+                  <ngx-extended-pdf-viewer [src]="'/assets/images/example.pdf'" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
+                 </div>
+             </ng-template>
+           </e-pane>
+       </e-panes>
+     </ejs-splitter>
+   </div>
+  </mat-tab>
+  <mat-tab label="View Case Documents">
+     <mat-card  class="choose">
+      <ejs-dropdownlist style="padding-left:10px ; width:150px; float:left" id='ddlelement' #samples [dataSource]='drop' [fields]='dropfields' [placeholder]='text' [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
+      <ejs-dropdownlist style="padding-left:10px ; width:150px; float:left" id='ddlelement' #samples [dataSource]='drop' [fields]='dropfields' [placeholder]='text2' [allowFiltering]='true' (filtering)='onFiltering($event)'></ejs-dropdownlist>
+      <button ejs-progressbutton class= "mar" content="View Documents" [enableProgress]="true" duration=4000 cssClass="e-outline e-primary e-hide-spinner e-progress-top"
+                            iconCss="e-btn-sb-icons e-download-icon"></button>
+     </mat-card>
+     <mat-tab-group [color]="'accent'" mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+      <mat-tab label="Documents List" >
+        <div class="control-section">
+          <br/>
+          <ejs-grid #casesgrid id='casesgrid' [toolbar] = 'toolbarOptions' [editSettings] = 'editOptions' [dataSource]='casedata' rowHeight='38' [allowSelection]='true' [allowSorting]='true' height='600' (dataBound)='onDataBound($event)' [enableHover]='false' [selectionSettings]='selectionSettings' [filterSettings]='filterSettings' [allowSorting]='true' [allowFiltering]='true' [enableVirtualization]='true'>
+              <e-columns>
+                  <e-column field='Employees' headerText='CLient Name' editType = 'dropdownedit' [filter]='filter' clipMode='EllipsisWithTooltip' width='200'>
+                      <ng-template #template let-data>
+                          <div class="e-icons">
+                              <div class="empimg">
+                                <span class="e-icons e-user">
+                                </span>
+                              </div>
+                              <span id="Emptext">{{data.Employees}}</span>
+                            </div>
+                      </ng-template>
+                  </e-column>
+                  <e-column field='Name' headerText='Case Name' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='150'></e-column>
+                  <e-column field='Name' headerText='File Name' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='150'></e-column>
+                <e-column field='Year' editType = 'datepickeredit' headerText='File Size' [filter]='filter' clipMode='EllipsisWithTooltip' width='140' ></e-column>
+                <e-column field='Year' headerText='Number of Pages' [filter]='filterSettings' clipMode='EllipsisWithTooltip' width='250'></e-column>
+                <e-column field='Year' editType = 'datepickeredit' headerText='Date of Upload' [filter]='filter' clipMode='EllipsisWithTooltip' width='140' ></e-column>
+              </e-columns>
+          </ejs-grid>
+      </div>
+      </mat-tab>
+      <mat-tab label="View Pdf" >
+        <ngx-extended-pdf-viewer [src]="'/assets/images/example.pdf'" useBrowserLocale="true" height="80vh"></ngx-extended-pdf-viewer>
+      </mat-tab>
+     </mat-tab-group>
+  </mat-tab>
+</mat-tab-group>
+
+
+<!-- <p>Hey</p>
+<div>
+  <form #employeeForm= "ngForm" (ngSubmit)="onSubmit(employeeForm)">
+    <div>
+    <input type="hidden" name ="_id" #_id="ngModel" [(ngModel)] = "employeeService.selectedEmployee._id">
+  </div>
+    <div>
+      <input type="text" name="name" #name = "ngModel" [(ngModel)] = "employeeService.selectedEmployee.name">
+    </div>
+    <div>
+      <input type="text" name="type" #name = "ngModel" [(ngModel)] = "employeeService.selectedEmployee.type">
+    </div>
+    <div>
+      <input type="text" name="mobile" #name = "ngModel" [(ngModel)] = "employeeService.selectedEmployee.mobile">
+    </div>
+    <div>
+      <input type="text" name="mail" #name = "ngModel" [(ngModel)] = "employeeService.selectedEmployee.mail">
+    </div>
+    <div>
+      <input type="text" name="address" #name = "ngModel" [(ngModel)] = "employeeService.selectedEmployee.address">
+    </div>
+    <div>
+      <button type="button" (click) = "resetForm(employeeForm)">Reset</button>
+      <button type="submit" [disabled] = "!employeeForm.valid">Submit</button>
+    </div>
+  </form> -->
